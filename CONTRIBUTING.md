@@ -1,137 +1,269 @@
-# Contributing to Ai-Whisperers Projects
+# Contributing to AI Whisperers
 
-Thank you for your interest in contributing! Our projects welcome contributions from researchers, students, and the open-source community.
+Thank you for your interest in contributing to our projects! We welcome contributions from developers, researchers, designers, and domain experts.
 
-## License Agreement
+## 📋 Table of Contents
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Workflow](#development-workflow)
+- [Code Standards](#code-standards)
+- [Pull Request Process](#pull-request-process)
+- [Types of Contributions](#types-of-contributions)
+- [Project-Specific Guidelines](#project-specific-guidelines)
+- [Community](#community)
 
-By contributing to our projects, you agree that your contributions will be licensed under the project's existing license (typically **PolyForm Noncommercial License 1.0.0**). This means:
+## 📜 Code of Conduct
 
-- Your contributions remain free for academic and research use
-- Commercial entities cannot use your contributions without a separate license
-- You retain copyright to your contributions
+Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md). We are committed to providing a welcoming and inclusive environment for all contributors.
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
+- **Git** for version control
+- **GitHub account** for collaboration
+- Project-specific requirements (check individual READMEs)
 
-- Python 3.8+ (3.10+ recommended)
-- See individual project READMEs for specific requirements
+### First-Time Setup
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/repository-name.git
+   cd repository-name
+   ```
+3. **Add upstream remote**:
+   ```bash
+   git remote add upstream https://github.com/Ai-Whisperers/repository-name.git
+   ```
+4. **Create a branch** for your work:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-### Development Setup
+### Development Environment
+Each project has specific setup instructions. Common patterns:
 
+#### **TypeScript/Next.js Projects (Vete, etc.)**
 ```bash
-# Clone the repository
-git clone https://github.com/Ai-Whisperers/<repository-name>.git
-cd <repository-name>
+# Install dependencies
+npm install
 
+# Run development server
+npm run dev
+
+# Run tests
+npm test
+
+# Type checking
+npm run typecheck
+
+# Linting
+npm run lint
+```
+
+#### **Python Projects (Research, AI)**
+```bash
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Install development dependencies
-pip install pytest black isort flake8 mypy ruff
-
-# Run tests to verify setup
-pytest
-```
-
-## Code Style
-
-We follow these conventions:
-
-- **Formatter**: `black` (line length 120)
-- **Import sorting**: `isort`
-- **Linting**: `ruff` and `flake8`
-- **Type checking**: `mypy`
-
-### Before Submitting
-
-```bash
-# Format code
-black src/ tests/ --line-length 120
-isort src/ tests/
-
-# Run linting
-ruff check src/
-flake8 src/
-
-# Run type checking
-mypy src/
+pip install -r requirements-dev.txt  # if available
 
 # Run tests
 pytest
+
+# Code quality
+black . --check
+isort . --check
+ruff check .
 ```
 
-## Types of Contributions
+## 🔄 Development Workflow
 
-### Bug Reports
+### Branch Strategy
+- `main` - Production-ready code
+- `develop` - Integration branch (if used)
+- `feature/*` - New features
+- `fix/*` - Bug fixes
+- `docs/*` - Documentation updates
+- `chore/*` - Maintenance tasks
 
-Open an issue with:
-- Clear description of the bug
-- Steps to reproduce
-- Expected vs actual behavior
-- System information (Python version, relevant library versions)
+### Commit Messages
+Use [Conventional Commits](https://www.conventionalcommits.org/):
+```
+type(scope): description
 
-### Feature Requests
+[optional body]
 
-Open an issue describing:
-- The problem you're trying to solve
-- Your proposed solution
-- Alternative approaches considered
+[optional footer]
+```
 
-### Code Contributions
+**Types:**
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation
+- `style:` - Formatting, missing semi-colons, etc.
+- `refactor:` - Code restructuring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance, dependencies, tooling
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Make your changes
-4. Add tests for new functionality
-5. Ensure all tests pass
-6. Submit a pull request
+**Examples:**
+```
+feat(auth): add Google OAuth integration
+fix(api): resolve CORS issue with upload endpoint
+docs(readme): update installation instructions
+```
+
+## 🎨 Code Standards
+
+### General Principles
+1. **Readability over cleverness** - Write code for humans first
+2. **Consistency** - Follow existing patterns in the codebase
+3. **Documentation** - Comment why, not what
+4. **Testing** - Write tests for new functionality
+5. **Security** - Never commit secrets, validate inputs
+
+### TypeScript/JavaScript
+- Use **TypeScript** for all new code
+- **ESLint** with strict rules
+- **Prettier** for formatting
+- **No `any` types** - use proper typing
+- **Functional components** with hooks
+- **Error boundaries** for React apps
+
+### Python
+- **Black** for formatting (line length 120)
+- **isort** for import sorting
+- **ruff** for linting
+- **mypy** for type checking
+- **PEP 8** compliance
+- **Type hints** for all new code
 
 ### Documentation
+- **README.md** - Project overview and quick start
+- **API documentation** - For libraries and APIs
+- **Inline comments** - Explain complex logic
+- **Docstrings** - For all public functions/classes
+- **Architecture decisions** - Record in ADRs
 
-- Fix typos or unclear explanations
-- Add examples
-- Improve docstrings
-- Write tutorials
+## 🔧 Pull Request Process
 
-### Research Contributions
+### Before Submitting
+1. **Sync with upstream**:
+   ```bash
+   git fetch upstream
+   git rebase upstream/main
+   ```
+2. **Run tests** - Ensure all tests pass
+3. **Check code quality** - Run linters and formatters
+4. **Update documentation** - Keep docs in sync with changes
+5. **Squash commits** - One logical change per commit
 
-- Share experimental results
-- Propose new architectures or methodologies
-- Contribute datasets
-- Write analysis notebooks
+### PR Checklist
+- [ ] Title follows conventional commit format
+- [ ] Description explains what and why, not just how
+- [ ] Tests added/updated for new functionality
+- [ ] Documentation updated
+- [ ] Code follows project standards
+- [ ] No breaking changes (or clearly documented)
+- [ ] Linked to relevant issues
 
-## Pull Request Process
+### Review Process
+1. **Automated checks** - CI/CD pipelines run
+2. **Code review** - At least one maintainer approval required
+3. **Address feedback** - Respond to review comments
+4. **Merge** - Squash and merge when approved
 
-1. **Title**: Use conventional commit format
-   - `feat: Add new feature`
-   - `fix: Correct bug`
-   - `docs: Update documentation`
-   - `test: Add tests`
+## 🎯 Types of Contributions
 
-2. **Description**: Explain what and why, not just how
+### Code Contributions
+- Bug fixes
+- New features
+- Performance improvements
+- Refactoring
+- Test coverage
 
-3. **Tests**: Include tests for new features
+### Documentation
+- Tutorials and guides
+- API documentation
+- Translation/localization
+- Code examples
+- Architecture documentation
 
-4. **Documentation**: Update relevant docs
+### Design & UX
+- UI/UX improvements
+- Accessibility enhancements
+- Design system components
+- User research
 
-5. **Review**: Address reviewer feedback promptly
+### Research & Analysis
+- Algorithm improvements
+- Benchmark results
+- Data analysis
+- Academic contributions
 
-## Questions?
+### Community Support
+- Answering questions
+- Triaging issues
+- Mentoring new contributors
+- Writing blog posts
 
-- Open a GitHub issue for technical questions
-- Email support@aiwhisperers.com for licensing questions
-- Check existing issues and documentation first
+## 📁 Project-Specific Guidelines
 
-## Recognition
+### Vete (Veterinary Platform)
+- **Priority:** Production stability and security
+- **Testing:** 100% test coverage for critical paths
+- **Security:** GDPR compliance, data protection
+- **UI/UX:** Mobile-first, Spanish language focus
 
-Contributors will be acknowledged in:
-- AUTHORS.md
+### Research Projects
+- **Reproducibility:** Include environment specs
+- **Documentation:** Methodology and results
+- **Data:** Follow ethical guidelines
+- **Publication:** Coordinate with research team
+
+### Infrastructure & Tools
+- **Reliability:** High availability requirements
+- **Monitoring:** Include observability
+- **Documentation:** Deployment and operations
+- **Security:** Least privilege principle
+
+## 👥 Community
+
+### Communication
+- **GitHub Issues** - For bugs and feature requests
+- **GitHub Discussions** - For questions and ideas
+- **Pull Requests** - For code contributions
+- **Email** - For sensitive or private matters
+
+### Getting Help
+1. Check existing documentation
+2. Search issues and discussions
+3. Ask in GitHub Discussions
+4. Contact maintainers if urgent
+
+### Recognition
+Contributors are recognized through:
+- GitHub contributor graph
 - Release notes
-- Academic publications (where appropriate)
+- Project documentation
+- Team acknowledgments
 
-Thank you for contributing to open science!
+## 📝 License
+
+By contributing, you agree that your contributions will be licensed under the same license as the project. Most projects use:
+- **PolyForm Noncommercial License** - For research and tools
+- **Proprietary licenses** - For commercial products
+- **MIT/Apache 2.0** - For open-source utilities
+
+Check individual repository LICENSE files for specifics.
+
+## 🙏 Thank You!
+
+Your contributions help us build better tools and advance AI research. We appreciate your time and effort!
+
+---
+
+*This document is maintained by the AI Whisperers team. Last updated: February 2026*
